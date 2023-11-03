@@ -1,3 +1,3 @@
-FROM wordpress:latest
+FROM alicesu/single-container-wordpress
 
 EXPOSE 80
