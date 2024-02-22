@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: luciosamoraes
+      WORDPRESS_DB_PASSWORD: 168425Lsa@@
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - db
+  db:
+    image: mysql:latest
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: luciosamoraes
+      MYSQL_PASSWORD: 168425Lsa@@
+      MYSQL_ROOT_PASSWORD: root_password
+
+volumes:
+  wordpress:
+  db:
