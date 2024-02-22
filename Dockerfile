@@ -1,14 +1,17 @@
-# Use a imagem base do WordPress
+# Use a imagem oficial do WordPress como base
 FROM wordpress:latest
 
-# Defina as variáveis de ambiente para configurar o banco de dados MySQL
-ENV WORDPRESS_DB_HOST=localhost \
-    WORDPRESS_DB_NAME=wordpress \
-    WORDPRESS_DB_USER=luciosamoraes \
-    WORDPRESS_DB_PASSWORD=168425Lsa@@
-
-# Exponha a porta padrão do WordPress
+# Expor a porta 80 para acessar o WordPress via HTTP
 EXPOSE 80
 
-# Copie o script SQL de inicialização para dentro do contêiner
+# Instalar o cliente MySQL
+RUN apt-get update && apt-get install -y mysql-client
+
+# Definir as variáveis de ambiente para o WordPress
+ENV WORDPRESS_DB_HOST=localhost
+ENV WORDPRESS_DB_NAME=wordpress
+ENV WORDPRESS_DB_USER=luciosamoraes
+ENV WORDPRESS_DB_PASSWORD=168425Lsa@@
+
+# Copiar o script de inicialização do banco de dados para o diretório de inicialização do MySQL
 COPY init.sql /docker-entrypoint-initdb.d/
