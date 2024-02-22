@@ -1,11 +1,14 @@
 # Use a imagem oficial do WordPress como base
 FROM wordpress:latest
 
+# Instalar o apt-utils para evitar o erro debconf
+RUN apt-get update && apt-get install -y apt-utils
+
 # Expor a porta 80 para acessar o WordPress via HTTP
 EXPOSE 80
 
 # Instalar o cliente MySQL
-RUN apt-get update && apt-get install -y default-mysql-client
+RUN apt-get install -y default-mysql-client
 
 # Definir as variáveis de ambiente para o WordPress
 ENV WORDPRESS_DB_HOST=localhost
