@@ -9,3 +9,6 @@ ENV WORDPRESS_DB_HOST=localhost \
 
 # Exponha a porta padrão do WordPress
 EXPOSE 80
+
+# Copie o script SQL de inicialização para dentro do contêiner
+COPY init.sql /docker-entrypoint-initdb.d/
