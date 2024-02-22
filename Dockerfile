@@ -1,13 +1,12 @@
-# Use a imagem base do WordPress
+# Use uma imagem oficial do WordPress
 FROM wordpress:latest
 
-# Atualize os pacotes e instale o apt-utils
-RUN apt-get update && \
-    apt-get install -y apt-utils
+# Instale o MySQL como um sistema de gerenciamento de banco de dados
+RUN apt-get update \
+    && apt-get install -y mysql-server
 
-# Instale o cliente MySQL sem interatividade
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y default-mysql-client
+# Exponha a porta 80 para o servidor web
+EXPOSE 80
 
-# Configure o usuário e senha do banco de dados MySQL
-ENV WORDPRESS_DB_USER="luciosamoraes"
-ENV WORDPRESS_DB_PASSWORD="168425Lsa@@"
+# Inicie o Apache e o MySQL quando o contêiner for iniciado
+CMD /etc/init.d/apache2 start && /etc/init.d/mysql start && bash
