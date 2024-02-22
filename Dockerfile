@@ -5,7 +5,7 @@ FROM wordpress:latest
 EXPOSE 80
 
 # Instalar o cliente MySQL
-RUN apt-get update && apt-get install -y mysql-client
+RUN apt-get update && apt-get install -y default-mysql-client
 
 # Definir as variáveis de ambiente para o WordPress
 ENV WORDPRESS_DB_HOST=localhost
